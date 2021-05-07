@@ -1,0 +1,33 @@
+{
+    "name": "StarWarsGqlApp",
+    "description": " ",
+    "version": "1.0",
+    "type": "flogo",
+    "resources": {
+        "physicalMemory": 1024,
+        "totalMemory": 4096,
+        "cpuQuota": 25
+    },
+    "endpoints": [
+        {
+            "name": "AppHealthCheck",
+            "pingable": true,
+            "protocol": "http",
+            "port": "7777",
+            "type": "private",
+            "ping": "/ping"
+        },
+        {
+            "protocol": "http",
+            "port": "7879",
+            "specType": "graphql",
+            "spec": {
+                "name": "StarWarsGqlApp",
+                "version": "1.1.0"
+            },
+            "title": "GraphQLTrigger"
+        }
+    ],
+    "propertyPrefix": "TCI_FLOGO_USER_",
+    "properties": []
+}

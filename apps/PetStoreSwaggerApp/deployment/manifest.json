@@ -1,0 +1,497 @@
+{
+    "name": "DS_PetStoreSwaggerApp",
+    "description": " ",
+    "version": "1.0",
+    "type": "flogo",
+    "resources": {
+        "physicalMemory": 1024,
+        "totalMemory": 4096,
+        "cpuQuota": 25
+    },
+    "endpoints": [
+        {
+            "name": "AppHealthCheck",
+            "pingable": true,
+            "protocol": "http",
+            "port": "7777",
+            "type": "private",
+            "ping": "/ping"
+        },
+        {
+            "protocol": "http",
+            "port": "9999",
+            "spec": {
+                "name": "DS_PetStoreSwaggerApp",
+                "version": "1.0.0"
+            },
+            "title": "ReceiveHTTPMessage",
+            "swagger": {
+                "swagger": "2.0",
+                "info": {
+                    "title": "DS_PetStoreSwaggerApp",
+                    "version": "1.0.0",
+                    "description": " "
+                },
+                "paths": {
+                    "/pet/{petId}": {
+                        "post": {
+                            "summary": "postpet_POST",
+                            "operationId": "post_pet_petId",
+                            "parameters": [
+                                {
+                                    "name": "petId",
+                                    "in": "path",
+                                    "description": "Request parameter",
+                                    "required": true,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "body",
+                                    "in": "body",
+                                    "description": "request body parameter",
+                                    "required": true,
+                                    "schema": {
+                                        "type": "object",
+                                        "required": [
+                                            "photoUrls",
+                                            "name",
+                                            "id",
+                                            "category",
+                                            "status",
+                                            "tags"
+                                        ],
+                                        "properties": {
+                                            "photoUrls": {
+                                                "type": "object",
+                                                "required": [
+                                                    "photoUrl"
+                                                ],
+                                                "properties": {
+                                                    "photoUrl": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "category": {
+                                                "type": "object",
+                                                "required": [
+                                                    "name",
+                                                    "id"
+                                                ],
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "id": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "status": {
+                                                "type": "string"
+                                            },
+                                            "tags": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "tag": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "uniqueItems": false,
+                                                            "type": "object",
+                                                            "required": [
+                                                                "name",
+                                                                "id"
+                                                            ],
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "id": {
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "responses": {
+                                "200": {
+                                    "schema": {
+                                        "type": "object",
+                                        "required": [
+                                            "photoUrls",
+                                            "name",
+                                            "id",
+                                            "category",
+                                            "status",
+                                            "tags"
+                                        ],
+                                        "properties": {
+                                            "photoUrls": {
+                                                "type": "object",
+                                                "required": [
+                                                    "photoUrl"
+                                                ],
+                                                "properties": {
+                                                    "photoUrl": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "category": {
+                                                "type": "object",
+                                                "required": [
+                                                    "name",
+                                                    "id"
+                                                ],
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "id": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "status": {
+                                                "type": "string"
+                                            },
+                                            "tags": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "tag": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "uniqueItems": false,
+                                                            "type": "object",
+                                                            "required": [
+                                                                "name",
+                                                                "id"
+                                                            ],
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "id": {
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "644": {
+                                    "schema": {
+                                        "type": "string"
+                                    },
+                                    "headers": {
+                                        "h1": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "get": {
+                            "summary": "getpet_GET",
+                            "operationId": "get_pet_petId",
+                            "parameters": [
+                                {
+                                    "name": "petId",
+                                    "in": "path",
+                                    "description": "Request parameter",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ],
+                            "responses": {
+                                "200": {
+                                    "schema": {
+                                        "type": "object",
+                                        "required": [
+                                            "photoUrls",
+                                            "name",
+                                            "id",
+                                            "category",
+                                            "status",
+                                            "tags"
+                                        ],
+                                        "properties": {
+                                            "photoUrls": {
+                                                "type": "object",
+                                                "required": [
+                                                    "photoUrl"
+                                                ],
+                                                "properties": {
+                                                    "photoUrl": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "category": {
+                                                "type": "object",
+                                                "required": [
+                                                    "name",
+                                                    "id"
+                                                ],
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "id": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "status": {
+                                                "type": "string"
+                                            },
+                                            "tags": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "tag": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "uniqueItems": false,
+                                                            "type": "object",
+                                                            "required": [
+                                                                "name",
+                                                                "id"
+                                                            ],
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "id": {
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "put": {
+                            "summary": "putpet_PUT",
+                            "operationId": "put_pet_petId",
+                            "parameters": [
+                                {
+                                    "name": "petId",
+                                    "in": "path",
+                                    "description": "Request parameter",
+                                    "required": true,
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "body",
+                                    "in": "body",
+                                    "description": "request body parameter",
+                                    "required": true,
+                                    "schema": {
+                                        "type": "object",
+                                        "required": [
+                                            "photoUrls",
+                                            "name",
+                                            "id",
+                                            "category",
+                                            "status",
+                                            "tags"
+                                        ],
+                                        "properties": {
+                                            "photoUrls": {
+                                                "type": "object",
+                                                "required": [
+                                                    "photoUrl"
+                                                ],
+                                                "properties": {
+                                                    "photoUrl": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "category": {
+                                                "type": "object",
+                                                "required": [
+                                                    "name",
+                                                    "id"
+                                                ],
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "id": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "status": {
+                                                "type": "string"
+                                            },
+                                            "tags": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "tag": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "uniqueItems": false,
+                                                            "type": "object",
+                                                            "required": [
+                                                                "name",
+                                                                "id"
+                                                            ],
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "id": {
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ],
+                            "responses": {
+                                "200": {
+                                    "schema": {
+                                        "type": "object",
+                                        "required": [
+                                            "photoUrls",
+                                            "name",
+                                            "id",
+                                            "category",
+                                            "status",
+                                            "tags"
+                                        ],
+                                        "properties": {
+                                            "photoUrls": {
+                                                "type": "object",
+                                                "required": [
+                                                    "photoUrl"
+                                                ],
+                                                "properties": {
+                                                    "photoUrl": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "category": {
+                                                "type": "object",
+                                                "required": [
+                                                    "name",
+                                                    "id"
+                                                ],
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "id": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "status": {
+                                                "type": "string"
+                                            },
+                                            "tags": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "tag": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "uniqueItems": false,
+                                                            "type": "object",
+                                                            "required": [
+                                                                "name",
+                                                                "id"
+                                                            ],
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "id": {
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "delete": {
+                            "summary": "deletepet_DELETE",
+                            "operationId": "delete_pet_petId",
+                            "parameters": [
+                                {
+                                    "name": "petId",
+                                    "in": "path",
+                                    "description": "Request parameter",
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            ],
+                            "responses": {
+                                "200": {
+                                    "schema": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "propertyPrefix": "TCI_FLOGO_USER_",
+    "properties": []
+}
