@@ -1,0 +1,6 @@
+{
+  "connection_details.host": "localhost",
+  "connection_details.port": 1435,
+  "greeting_message": "It's a beautiful day!",
+  "log_level": "INFO"
+}

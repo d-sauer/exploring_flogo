@@ -19,7 +19,7 @@
         },
         {
             "protocol": "http",
-            "port": "9999",
+            "port": "1435",
             "spec": {
                 "name": "DS_FlightApp",
                 "version": "1.0.0"
@@ -60,7 +60,12 @@
         {
             "name": "connection_details.port",
             "datatype": "number",
-            "default": "1433"
+            "default": "1435"
+        },
+        {
+            "name": "log_level",
+            "datatype": "string",
+            "default": "INFO"
         }
     ]
 }

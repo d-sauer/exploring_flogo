@@ -17,7 +17,7 @@
             "name": "tibco-wi-rest",
             "description": "Simple REST Trigger",
             "settings": {
-                "port": 9999,
+                "port": "=$property[\"connection_details.port\"]",
                 "secureConnection": false,
                 "serverKey": "",
                 "caCertificate": "",
@@ -86,9 +86,9 @@
                         "activity": {
                             "ref": "#log",
                             "input": {
-                                "Log Level": "=$property[\"greeting_message\"]",
+                                "Log Level": "=$property[\"log_level\"]",
                                 "flowInfo": true,
-                                "message": "Start Flight mode..."
+                                "message": "=$property[\"log_level\"]"
                             }
                         }
                     },
@@ -151,10 +151,15 @@
         {
             "name": "connection_details.port",
             "type": "float64",
-            "value": 1433
+            "value": 1435
+        },
+        {
+            "name": "log_level",
+            "type": "string",
+            "value": "INFO"
         }
     ],
     "connections": {},
     "contrib": "W3sicmVmIjoiZ2l0LnRpYmNvLmNvbS9naXQvcHJvZHVjdC9pcGFhcy93aS1jb250cmliLmdpdC9jb250cmlidXRpb25zL0dlbmVyYWwiLCJzM2xvY2F0aW9uIjoiVGliY28vR2VuZXJhbCJ9XQ==",
-    "fe_metadata": "UEsDBAoAAAAIACtVp1KrqSRGFQAAABMAAAAIAAAAYXBwLmpzb26rViopykxPTy1yy8kvL1ayio6tBQBQSwECFAAKAAAACAArVadSq6kkRhUAAAATAAAACAAAAAAAAAAAAAAAAAAAAAAAYXBwLmpzb25QSwUGAAAAAAEAAQA2AAAAOwAAAAAA"
+    "fe_metadata": "UEsDBAoAAAAIAJhzp1KrqSRGFQAAABMAAAAIAAAAYXBwLmpzb26rViopykxPTy1yy8kvL1ayio6tBQBQSwECFAAKAAAACACYc6dSq6kkRhUAAAATAAAACAAAAAAAAAAAAAAAAAAAAAAAYXBwLmpzb25QSwUGAAAAAAEAAQA2AAAAOwAAAAAA"
 }
