@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flightapp-deployment
+  labels:
+    app: flightapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flightapp
+  template:
+    metadata:
+      labels:
+        app: flightapp
+    spec:
+      containers:
+      - name: flightapp
+        image: <docker id>/flight_app_repo:v1
+        ports:
+        - containerPort: 9990

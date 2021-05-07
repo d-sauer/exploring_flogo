@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flightapp-service
+spec:
+    selector:
+        app: flightapp
+    ports:
+      - port: 80
+        protocol: TCP
+        targetPort: 9990
+        nodePort: 32000
+    type: NodePort
