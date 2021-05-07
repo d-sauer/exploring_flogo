@@ -1,0 +1,391 @@
+{
+    "imports": [
+        "github.com/project-flogo/flow",
+        "github.com/project-flogo/contrib/activity/actreturn",
+        "github.com/project-flogo/grpc/trigger/grpc"
+    ],
+    "name": "PetStoregRPCApp",
+    "description": " ",
+    "version": "1.1.0",
+    "type": "flogo:app",
+    "appModel": "1.1.1",
+    "feVersion": "2.8.0",
+    "triggers": [
+        {
+            "ref": "#grpc",
+            "name": "grpc-trigger",
+            "description": "gRPC Trigger",
+            "settings": {
+                "port": 8087,
+                "protoName": "PetStore.proto",
+                "protoFile": {
+                    "filename": "PetStore.proto",
+                    "content": "data:application/octet-stream;base64,c3ludGF4ID0gInByb3RvMyI7DQpwYWNrYWdlIG1haW47DQptZXNzYWdlIFBldCB7DQogICAgaW50MzIgaWQgPSAxOw0KICAgIHN0cmluZyBuYW1lID0gMjsNCn0NCm1lc3NhZ2UgVXNlciB7DQogICAgaW50MzIgaWQgPSAxOw0KICAgIHN0cmluZyB1c2VybmFtZSA9IDI7DQogICAgc3RyaW5nIGVtYWlsID0gMzsNCiAgICBzdHJpbmcgcGhvbmUgPSA0Ow0KfQ0KbWVzc2FnZSBQZXRCeUlkUmVxdWVzdCB7DQogICAgaW50MzIgaWQgPSAxOw0KfQ0KbWVzc2FnZSBVc2VyQnlOYW1lUmVxdWVzdCB7DQogICAgc3RyaW5nIHVzZXJuYW1lID0gMTsNCn0NCm1lc3NhZ2UgUGV0UmVzcG9uc2Ugew0KICAgIFBldCBwZXQgPSAxOw0KfQ0KbWVzc2FnZSBVc2VyUmVzcG9uc2Ugew0KICAgIFVzZXIgdXNlciA9IDE7DQp9DQptZXNzYWdlIFBldFJlcXVlc3Qgew0KICAgIGludDMyIGlkID0gMTsNCiAgICBzdHJpbmcgbmFtZSA9IDI7DQp9DQptZXNzYWdlIFVzZXJSZXF1ZXN0IHsNCiAgICBpbnQzMiBpZCA9IDE7DQogICAgc3RyaW5nIHVzZXJuYW1lID0gMjsNCiAgICBzdHJpbmcgZW1haWwgPSAzOw0KICAgIHN0cmluZyBwaG9uZSA9IDQ7DQp9DQpzZXJ2aWNlIEdSUEMyUmVzdFBldFN0b3JlU2VydmljZSB7DQogICAgcnBjIFBldEJ5SWQgKFBldEJ5SWRSZXF1ZXN0KSByZXR1cm5zIChQZXRSZXNwb25zZSk7DQogICAgcnBjIFVzZXJCeU5hbWUgKFVzZXJCeU5hbWVSZXF1ZXN0KSByZXR1cm5zIChVc2VyUmVzcG9uc2UpOw0KICAgIHJwYyBQZXRQVVQgKFBldFJlcXVlc3QpIHJldHVybnMgKFBldFJlc3BvbnNlKTsNCiAgICBycGMgVXNlclBVVCAoVXNlclJlcXVlc3QpIHJldHVybnMgKFVzZXJSZXNwb25zZSk7DQp9DQo="
+                },
+                "enableTLS": false,
+                "serverCert": "",
+                "serverKey": ""
+            },
+            "id": "gRPCTrigger",
+            "handlers": [
+                {
+                    "description": "",
+                    "settings": {
+                        "serviceName": "GRPC2RestPetStoreService",
+                        "methodName": "PetById"
+                    },
+                    "action": {
+                        "ref": "github.com/project-flogo/flow",
+                        "settings": {
+                            "flowURI": "res://flow:GRPC2RestPetStoreService_PetById"
+                        },
+                        "input": {
+                            "params": {
+                                "mapping": {
+                                    "id": "=$.params.id"
+                                }
+                            }
+                        },
+                        "output": {
+                            "data": {
+                                "mapping": {
+                                    "pet": {
+                                        "id": "=$.data.pet.id",
+                                        "name": "=$.data.pet.name"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "reply": {
+                        "code": 200
+                    },
+                    "schemas": {
+                        "reply": {
+                            "data": {
+                                "type": "json",
+                                "value": "{\"type\":\"object\",\"properties\":{\"pet\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"name\":{\"type\":\"string\"}}}},\"required\":[]}",
+                                "fe_metadata": "{\"type\":\"object\",\"properties\":{\"pet\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"name\":{\"type\":\"string\"}}}},\"required\":[]}"
+                            }
+                        },
+                        "output": {
+                            "params": {
+                                "type": "json",
+                                "value": "{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"}},\"required\":[]}",
+                                "fe_metadata": "{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"}},\"required\":[]}"
+                            }
+                        }
+                    }
+                },
+                {
+                    "description": "",
+                    "settings": {
+                        "serviceName": "GRPC2RestPetStoreService",
+                        "methodName": "UserByName"
+                    },
+                    "action": {
+                        "ref": "github.com/project-flogo/flow",
+                        "settings": {
+                            "flowURI": "res://flow:GRPC2RestPetStoreService_UserByName"
+                        },
+                        "input": {
+                            "params": "=$.params"
+                        },
+                        "output": {
+                            "data": "=$.data"
+                        }
+                    },
+                    "reply": {
+                        "code": 200
+                    },
+                    "schemas": {
+                        "reply": {
+                            "data": {
+                                "type": "json",
+                                "value": "{\"type\":\"object\",\"properties\":{\"user\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"username\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"}}}},\"required\":[]}",
+                                "fe_metadata": "{\"type\":\"object\",\"properties\":{\"user\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"username\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"}}}},\"required\":[]}"
+                            }
+                        },
+                        "output": {
+                            "params": {
+                                "type": "json",
+                                "value": "{\"type\":\"object\",\"properties\":{\"username\":{\"type\":\"string\"}},\"required\":[]}",
+                                "fe_metadata": "{\"type\":\"object\",\"properties\":{\"username\":{\"type\":\"string\"}},\"required\":[]}"
+                            }
+                        }
+                    }
+                },
+                {
+                    "description": "",
+                    "settings": {
+                        "serviceName": "GRPC2RestPetStoreService",
+                        "methodName": "PetPUT"
+                    },
+                    "action": {
+                        "ref": "github.com/project-flogo/flow",
+                        "settings": {
+                            "flowURI": "res://flow:GRPC2RestPetStoreService_PetPUT"
+                        },
+                        "input": {
+                            "params": "=$.params"
+                        },
+                        "output": {
+                            "data": "=$.data"
+                        }
+                    },
+                    "reply": {
+                        "code": 200
+                    },
+                    "schemas": {
+                        "reply": {
+                            "data": {
+                                "type": "json",
+                                "value": "{\"type\":\"object\",\"properties\":{\"pet\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"name\":{\"type\":\"string\"}}}},\"required\":[]}",
+                                "fe_metadata": "{\"type\":\"object\",\"properties\":{\"pet\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"name\":{\"type\":\"string\"}}}},\"required\":[]}"
+                            }
+                        },
+                        "output": {
+                            "params": {
+                                "type": "json",
+                                "value": "{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"name\":{\"type\":\"string\"}},\"required\":[]}",
+                                "fe_metadata": "{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"name\":{\"type\":\"string\"}},\"required\":[]}"
+                            }
+                        }
+                    }
+                },
+                {
+                    "description": "",
+                    "settings": {
+                        "serviceName": "GRPC2RestPetStoreService",
+                        "methodName": "UserPUT"
+                    },
+                    "action": {
+                        "ref": "github.com/project-flogo/flow",
+                        "settings": {
+                            "flowURI": "res://flow:GRPC2RestPetStoreService_UserPUT"
+                        },
+                        "input": {
+                            "params": "=$.params"
+                        },
+                        "output": {
+                            "data": "=$.data"
+                        }
+                    },
+                    "reply": {
+                        "code": 200
+                    },
+                    "schemas": {
+                        "reply": {
+                            "data": {
+                                "type": "json",
+                                "value": "{\"type\":\"object\",\"properties\":{\"user\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"username\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"}}}},\"required\":[]}",
+                                "fe_metadata": "{\"type\":\"object\",\"properties\":{\"user\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"username\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"}}}},\"required\":[]}"
+                            }
+                        },
+                        "output": {
+                            "params": {
+                                "type": "json",
+                                "value": "{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"username\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"}},\"required\":[]}",
+                                "fe_metadata": "{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"username\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"}},\"required\":[]}"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "resources": [
+        {
+            "id": "flow:GRPC2RestPetStoreService_PetById",
+            "data": {
+                "name": "GRPC2RestPetStoreService_PetById",
+                "description": "",
+                "links": [],
+                "tasks": [
+                    {
+                        "id": "Return",
+                        "name": "Return",
+                        "description": "Simple Return Activity",
+                        "activity": {
+                            "ref": "#actreturn",
+                            "settings": {
+                                "mappings": {
+                                    "data": {
+                                        "mapping": {
+                                            "pet": {
+                                                "id": "=$flow.params.id",
+                                                "name": "Cuan"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "metadata": {
+                    "input": [
+                        {
+                            "name": "params",
+                            "type": "object",
+                            "schema": {
+                                "type": "json",
+                                "value": "{\"id\":{\"type\":\"number\"}}"
+                            }
+                        }
+                    ],
+                    "output": [
+                        {
+                            "name": "data",
+                            "type": "object",
+                            "schema": {
+                                "type": "json",
+                                "value": "{\"pet\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"name\":{\"type\":\"string\"}}}}"
+                            }
+                        }
+                    ],
+                    "fe_metadata": {
+                        "input": "{\"type\":\"object\",\"title\":\"gRPCTrigger\",\"properties\":{\"params\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"}},\"required\":[]}}}",
+                        "output": "{\"type\":\"object\",\"title\":\"Inputs\",\"properties\":{\"data\":{\"type\":\"object\",\"properties\":{\"pet\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"name\":{\"type\":\"string\"}}}},\"required\":[]}},\"required\":[]}"
+                    }
+                }
+            }
+        },
+        {
+            "id": "flow:GRPC2RestPetStoreService_UserByName",
+            "data": {
+                "name": "GRPC2RestPetStoreService_UserByName",
+                "description": "",
+                "links": [],
+                "tasks": [
+                    {
+                        "id": "Return",
+                        "name": "Return",
+                        "description": "Simple Return Activity",
+                        "activity": {
+                            "ref": "#actreturn"
+                        }
+                    }
+                ],
+                "metadata": {
+                    "input": [
+                        {
+                            "name": "params",
+                            "type": "object",
+                            "schema": {
+                                "type": "json",
+                                "value": "{\"username\":{\"type\":\"string\"}}"
+                            }
+                        }
+                    ],
+                    "output": [
+                        {
+                            "name": "data",
+                            "type": "object",
+                            "schema": {
+                                "type": "json",
+                                "value": "{\"user\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"username\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"}}}}"
+                            }
+                        }
+                    ],
+                    "fe_metadata": {
+                        "input": "{\"type\":\"object\",\"title\":\"gRPCTrigger\",\"properties\":{\"params\":{\"type\":\"object\",\"properties\":{\"username\":{\"type\":\"string\"}},\"required\":[]}}}",
+                        "output": "{\"type\":\"object\",\"title\":\"Inputs\",\"properties\":{\"data\":{\"type\":\"object\",\"properties\":{\"user\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"username\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"}}}},\"required\":[]}},\"required\":[]}"
+                    }
+                }
+            }
+        },
+        {
+            "id": "flow:GRPC2RestPetStoreService_PetPUT",
+            "data": {
+                "name": "GRPC2RestPetStoreService_PetPUT",
+                "description": "",
+                "links": [],
+                "tasks": [
+                    {
+                        "id": "Return",
+                        "name": "Return",
+                        "description": "Simple Return Activity",
+                        "activity": {
+                            "ref": "#actreturn"
+                        }
+                    }
+                ],
+                "metadata": {
+                    "input": [
+                        {
+                            "name": "params",
+                            "type": "object",
+                            "schema": {
+                                "type": "json",
+                                "value": "{\"id\":{\"type\":\"number\"},\"name\":{\"type\":\"string\"}}"
+                            }
+                        }
+                    ],
+                    "output": [
+                        {
+                            "name": "data",
+                            "type": "object",
+                            "schema": {
+                                "type": "json",
+                                "value": "{\"pet\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"name\":{\"type\":\"string\"}}}}"
+                            }
+                        }
+                    ],
+                    "fe_metadata": {
+                        "input": "{\"type\":\"object\",\"title\":\"gRPCTrigger\",\"properties\":{\"params\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"name\":{\"type\":\"string\"}},\"required\":[]}}}",
+                        "output": "{\"type\":\"object\",\"title\":\"Inputs\",\"properties\":{\"data\":{\"type\":\"object\",\"properties\":{\"pet\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"name\":{\"type\":\"string\"}}}},\"required\":[]}},\"required\":[]}"
+                    }
+                }
+            }
+        },
+        {
+            "id": "flow:GRPC2RestPetStoreService_UserPUT",
+            "data": {
+                "name": "GRPC2RestPetStoreService_UserPUT",
+                "description": "",
+                "links": [],
+                "tasks": [
+                    {
+                        "id": "Return",
+                        "name": "Return",
+                        "description": "Simple Return Activity",
+                        "activity": {
+                            "ref": "#actreturn"
+                        }
+                    }
+                ],
+                "metadata": {
+                    "input": [
+                        {
+                            "name": "params",
+                            "type": "object",
+                            "schema": {
+                                "type": "json",
+                                "value": "{\"id\":{\"type\":\"number\"},\"username\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"}}"
+                            }
+                        }
+                    ],
+                    "output": [
+                        {
+                            "name": "data",
+                            "type": "object",
+                            "schema": {
+                                "type": "json",
+                                "value": "{\"user\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"username\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"}}}}"
+                            }
+                        }
+                    ],
+                    "fe_metadata": {
+                        "input": "{\"type\":\"object\",\"title\":\"gRPCTrigger\",\"properties\":{\"params\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"username\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"}},\"required\":[]}}}",
+                        "output": "{\"type\":\"object\",\"title\":\"Inputs\",\"properties\":{\"data\":{\"type\":\"object\",\"properties\":{\"user\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"username\":{\"type\":\"string\"},\"email\":{\"type\":\"string\"},\"phone\":{\"type\":\"string\"}}}},\"required\":[]}},\"required\":[]}"
+                    }
+                }
+            }
+        }
+    ],
+    "properties": [],
+    "connections": {},
+    "contrib": "W3sicmVmIjoiZ2l0aHViLmNvbS9wcm9qZWN0LWZsb2dvL2dycGMvdHJpZ2dlci9ncnBjIiwiczNsb2NhdGlvbiI6IntVU0VSSUR9L0RlZmF1bHQvdHJpZ2dlci9ncnBjIn1d",
+    "fe_metadata": "UEsDBAoAAAAIAMdTp1KrqSRGFQAAABMAAAAIAAAAYXBwLmpzb26rViopykxPTy1yy8kvL1ayio6tBQBQSwECFAAKAAAACADHU6dSq6kkRhUAAAATAAAACAAAAAAAAAAAAAAAAAAAAAAAYXBwLmpzb25QSwUGAAAAAAEAAQA2AAAAOwAAAAAA"
+}
