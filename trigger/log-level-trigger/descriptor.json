@@ -1,0 +1,42 @@
+{
+  "name": "log-level-trigger",
+  "type": "flogo:trigger",
+  "version": "0.0.1",
+  "title": "Change log level trigger from URL",
+  "description": "Trigger to change flow log level on the fly",
+  "homepage": "https://github.com/d-sauer/exploring_flogo/trigger/log-level-trigger",
+  "settings": [
+    {
+      "name": "Log level endpoint path",
+      "type": "string",
+      "value": "/app/log-level",
+      "required": true,
+      "description": "Endpoint URL"
+    },
+    {
+      "name": "Application log level",
+      "type": "string"
+    }
+
+  ],
+  "output": [
+    {
+      "name": "Output Flow log level",
+      "type": "string"
+    }
+  ],
+  "reply": [
+    {
+      "name": "aReply",
+      "type": "any"
+    }
+  ],
+  "handler": {
+    "settings": [
+      {
+        "name": "Flow log level",
+        "type": "string"
+      }
+    ]
+  }
+}
