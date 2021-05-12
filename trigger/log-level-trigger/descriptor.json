@@ -25,12 +25,6 @@
       "type": "string"
     }
   ],
-  "reply": [
-    {
-      "name": "Reply",
-      "type": "any"
-    }
-  ],
   "handler": {
     "settings": [
       {
