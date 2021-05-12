@@ -1,15 +1,15 @@
 package log_level
 
 type Settings struct {
-	//ASetting int `md:"aSetting,required"`
+	ASetting int `md:"Setting"`
 }
 
 type HandlerSettings struct {
-	//ASetting string `md:"aSetting,required"`
+	ASetting string `md:"aSetting,required"`
 }
 
 type Output struct {
-	//AnOutput string `md:"anOutput"`
+	AnOutput string `md:"anOutput"`
 }
 
 func (o *Output) FromMap(values map[string]interface{}) error {
@@ -25,21 +25,21 @@ func (o *Output) FromMap(values map[string]interface{}) error {
 
 func (o *Output) ToMap() map[string]interface{} {
 	return map[string]interface{}{
-		//"anOutput": o.AnOutput,
+		"anOutput": o.AnOutput,
 	}
 }
 
 type Reply struct {
-	//AReply interface{} `md:"aReply"`
+	AReply interface{} `md:"aReply"`
 }
 
 func (r *Reply) FromMap(values map[string]interface{}) error {
-	//r.AReply = values["aReply"]
+	r.AReply = values["aReply"]
 	return nil
 }
 
 func (r *Reply) ToMap() map[string]interface{} {
 	return map[string]interface{}{
-		//"aReply": r.AReply,
+		"aReply": r.AReply,
 	}
 }
