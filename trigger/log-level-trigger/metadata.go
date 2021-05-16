@@ -1,5 +1,15 @@
 package log_level
 
+import (
+	"fmt"
+	"github.com/project-flogo/core/trigger"
+)
+
+func init() {
+	fmt.Println("Init log-level-trigger metatada")
+	_ = trigger.Register(&Trigger{}, &Factory{})
+}
+
 type Settings struct {
 	ASetting int `md:"Setting"`
 }

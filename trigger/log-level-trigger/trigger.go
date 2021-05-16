@@ -1,6 +1,7 @@
 package log_level
 
 import (
+	"fmt"
 	"github.com/project-flogo/core/data/metadata"
 	"github.com/project-flogo/core/support/log"
 	"github.com/project-flogo/core/trigger"
@@ -9,6 +10,7 @@ import (
 var triggerMetadata = trigger.NewMetadata(&Settings{}, &HandlerSettings{}, &Output{})
 
 func init() {
+	fmt.Println("Init log-level-trigger")
 	_ = trigger.Register(&Trigger{}, &Factory{})
 }
 
