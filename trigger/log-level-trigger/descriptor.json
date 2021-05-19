@@ -7,29 +7,38 @@
   "homepage": "https://github.com/d-sauer/exploring_flogo/trigger/log-level-trigger",
   "settings": [
     {
-      "name": "Log level endpoint path",
+      "name": "path",
       "type": "string",
       "value": "/app/log-level",
-      "required": true,
+      "required": false,
       "description": "Endpoint URL"
-    },
-    {
-      "name": "Application log level",
-      "type": "string"
     }
-
   ],
   "output": [
     {
-      "name": "Output Flow log level",
-      "type": "string"
+      "name": "logLevel",
+      "type": "string",
+      "description": "Set log level"
+    }
+  ],
+  "reply": [
+    {
+      "name": "reply",
+      "type": "string",
+      "description": "Return set log level"
     }
   ],
   "handler": {
     "settings": [
       {
-        "name": "Flow log level",
-        "type": "string"
+        "name": "flowLogLevel",
+        "type": "string",
+        "allowed": [
+          "INFO",
+          "DEBUG",
+          "WARNING",
+          "ERROR"
+        ]
       }
     ]
   }

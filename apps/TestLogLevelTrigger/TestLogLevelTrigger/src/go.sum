@@ -4,6 +4,8 @@ github.com/araddon/dateparse v0.0.0-20190622164848-0fb0a474d195 h1:c4mLfegoDw6Oh
 github.com/araddon/dateparse v0.0.0-20190622164848-0fb0a474d195/go.mod h1:SLqhdZcd+dF3TEVL2RMoob5bBP5R1P1qkox+HtCBgGI=
 github.com/d-sauer/exploring_flogo/trigger/log-level-trigger v0.0.0-20210511211036-5f8a91960d2c h1:nW9BRAqS+IWgAyZCE8XB5QA6TXn0xYU4lIwDdvv4uKM=
 github.com/d-sauer/exploring_flogo/trigger/log-level-trigger v0.0.0-20210511211036-5f8a91960d2c/go.mod h1:PHQDALArCfFU1UcUKhvq1GbHXPRPWZ5to8QAdPU0Q9g=
+github.com/d-sauer/exploring_flogo/trigger/log-level-trigger v0.0.0-20210516131214-e50395c2bc26 h1:6pFKKpAZbah71UZN90eUtI6fW4V6GPNweZ3iXYOTHP0=
+github.com/d-sauer/exploring_flogo/trigger/log-level-trigger v0.0.0-20210516131214-e50395c2bc26/go.mod h1:PHQDALArCfFU1UcUKhvq1GbHXPRPWZ5to8QAdPU0Q9g=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

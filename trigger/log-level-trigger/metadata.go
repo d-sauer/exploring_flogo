@@ -1,55 +1,103 @@
 package log_level
 
-import (
-	"fmt"
-	"github.com/project-flogo/core/trigger"
-)
+import "github.com/project-flogo/core/data/coerce"
 
-func init() {
-	fmt.Println("Init log-level-trigger metatada")
-	_ = trigger.Register(&Trigger{}, &Factory{})
-}
+//
+// Settings
+//
 
 type Settings struct {
-	ASetting int `md:"Setting"`
+	Path string `md:"path"` // Endpoint path
 }
 
-type HandlerSettings struct {
-	ASetting string `md:"aSetting,required"`
+func (s *Settings) ToMap() map[string]interface{} {
+	return map[string]interface{}{
+		"path": s.Path,
+	}
 }
 
-type Output struct {
-	AnOutput string `md:"anOutput"`
-}
+func (s *Settings) fromMap(values map[string]interface{}) error {
+	var err error
 
-func (o *Output) FromMap(values map[string]interface{}) error {
-
-	//var err error
-	//o.AnOutput, err = coerce.ToString(values["anOutput"])
-	//if err != nil {
-	//	return err
-	//}
+	s.Path, err = coerce.ToString(values["path"])
+	if err != nil {
+		return err
+	}
 
 	return nil
+}
+
+//
+// Output
+//
+
+type Output struct {
+	LogLevel string `md:"logLevel"` // The data received from path
 }
 
 func (o *Output) ToMap() map[string]interface{} {
 	return map[string]interface{}{
-		"anOutput": o.AnOutput,
+		"logLevel": o.LogLevel,
 	}
 }
 
-type Reply struct {
-	AReply interface{} `md:"aReply"`
+func (o *Output) fromMap(values map[string]interface{}) error {
+	var err error
+
+	o.LogLevel, err = coerce.ToString(values["logLevel"])
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
-func (r *Reply) FromMap(values map[string]interface{}) error {
-	r.AReply = values["aReply"]
-	return nil
+//
+// Reply
+//
+
+type Reply struct {
+	Reply string `md:"reply"` // The reply send back as confirmation for changed log level
 }
 
 func (r *Reply) ToMap() map[string]interface{} {
 	return map[string]interface{}{
-		"aReply": r.AReply,
+		"reply": r.Reply,
 	}
+}
+
+func (r *Reply) fromMap(values map[string]interface{}) error {
+	var err error
+
+	r.Reply, err = coerce.ToString(values["reply"])
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+//
+// HandlerSettings
+//
+
+type HandlerSettings struct {
+	FlowLogLevel string `md:"flowLogLevel"` // Log level per flow instance
+}
+
+func (hs *HandlerSettings) ToMap() map[string]interface{} {
+	return map[string]interface{}{
+		"flowLogLevel": hs.FlowLogLevel,
+	}
+}
+
+func (hs *HandlerSettings) fromMap(values map[string]interface{}) error {
+	var err error
+
+	hs.FlowLogLevel, err = coerce.ToString(values["flowLogLevel"])
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
