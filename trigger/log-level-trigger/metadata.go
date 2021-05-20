@@ -7,7 +7,7 @@ import "github.com/project-flogo/core/data/coerce"
 //
 
 type Settings struct {
-	Path string `md:"path"` // Endpoint path
+	Path string `md:"path" default:"/app/log-level"` // Endpoint path
 }
 
 func (s *Settings) ToMap() map[string]interface{} {

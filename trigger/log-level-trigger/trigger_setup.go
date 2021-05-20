@@ -1,6 +1,7 @@
 package log_level
 
 import (
+	"errors"
 	"fmt"
 	"github.com/project-flogo/core/data/metadata"
 	"github.com/project-flogo/core/support/log"
@@ -36,9 +37,10 @@ func (*Factory) New(config *trigger.Config) (trigger.Trigger, error) {
 
 // Trigger ...
 type Trigger struct {
-	settings *Settings
-	handlers []trigger.Handler
-	logger   log.Logger
+	settings      *Settings
+	handlers      []trigger.Handler
+	logger        log.Logger
+	restoreLogger func()
 }
 
 // Initialize initializes the trigger
@@ -48,11 +50,17 @@ func (t *Trigger) Initialize(ctx trigger.InitContext) error {
 	t.handlers = ctx.GetHandlers()
 	t.logger = ctx.Logger()
 	path := t.settings.Path
+
 	t.logger.Infof("Initialize endpoint path: `%s`", path)
 
-	err := createEndpoint(t)
+	restoreLoggerFunc := createEndpoint(t)
+	if restoreLoggerFunc == nil {
+		return errors.New("Can't create custom logger")
+	}
 
-	return err
+	t.restoreLogger = restoreLoggerFunc
+
+	return nil
 }
 
 func (t Trigger) Start() error {
@@ -63,56 +71,7 @@ func (t Trigger) Start() error {
 
 func (t Trigger) Stop() error {
 	t.logger.Info("Stopping trigger")
+	defer t.restoreLogger()
+
 	return nil
 }
-
-//
-//type Trigger struct {
-//	settings *Settings
-//	logger   log.Logger
-//	handlers map[string]*clientHandler
-//}
-//
-//type clientHandler struct {
-//	handler  trigger.Handler
-//	settings *HandlerSettings
-//}
-//
-//type Factory struct {
-//}
-//
-//func (t Trigger) Start() error {
-//	t.logger.Info("Starting trigger logic: log-level")
-//
-//	return nil
-//}
-//
-//func (t Trigger) Stop() error {
-//	t.logger.Info("Stopping trigger: log-level")
-//
-//	return nil
-//}
-//
-//func (t Trigger) Initialize(ctx trigger.InitContext) error {
-//	t.logger = ctx.Logger()
-//	t.logger.Info("Initialising log-trigger")
-//
-//	t.handlers = make(map[string]*clientHandler)
-//
-//	return nil
-//}
-//
-//func (f Factory) Metadata() *trigger.Metadata {
-//	return triggerMetadata
-//}
-//
-//func (f Factory) New(config *trigger.Config) (trigger.Trigger, error) {
-//	s := &Settings{}
-//
-//	err := metadata.MapToStruct(config.Settings, s, true)
-//	if err != nil {
-//		return nil, err
-//	}
-//
-//	return &Trigger{settings: s}, nil
-//}
