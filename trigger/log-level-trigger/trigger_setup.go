@@ -6,6 +6,7 @@ import (
 	"github.com/project-flogo/core/data/metadata"
 	"github.com/project-flogo/core/support/log"
 	"github.com/project-flogo/core/trigger"
+	"time"
 )
 
 var triggerMetadata = trigger.NewMetadata(&Settings{}, &HandlerSettings{}, &Output{}, &Reply{})
@@ -65,7 +66,15 @@ func (t *Trigger) Initialize(ctx trigger.InitContext) error {
 
 func (t Trigger) Start() error {
 	t.logger.Info("Starting trigger logic: log-level")
+	const MAX = 100
 
+	for i := 0; i < MAX; i++ {
+		time.Sleep(1 * time.Second)
+		fmt.Println("Count: ", i, " of ", MAX)
+
+		t.logger.Info("Test info message i:", i)
+		t.logger.Debug("Test debug message i:", i)
+	}
 	return nil
 }
 

@@ -1,36 +1,44 @@
 {
-  "name": "TestLogLevelTrigger",
-  "type": "flogo:app",
-  "version": "1.0.0",
-  "description": " ",
-  "appModel": "1.1.1",
   "imports": [
     "github.com/project-flogo/flow",
     "github.com/project-flogo/contrib/activity/log",
     "github.com/d-sauer/exploring_flogo/trigger/log-level-trigger"
   ],
+  "name": "TestLogLevelTrigger",
+  "description": " ",
+  "version": "1.0.0",
+  "type": "flogo:app",
+  "appModel": "1.1.1",
+  "tags": [],
+  "feVersion": "2.12.0",
   "triggers": [
     {
-      "id": "ChangelogleveltriggerfromURL",
       "ref": "#log-level-trigger",
+      "name": "log-level-trigger",
+      "description": "Trigger to change flow log level on the fly",
       "settings": {
-        "Application log level": "INFO",
-        "Log level endpoint path": "/app/log-level"
+        "path": "/app/log-level"
       },
+      "id": "ChangelogleveltriggerfromURL",
       "handlers": [
         {
-          "name": "FlowA",
+          "description": "",
           "settings": {
-            "Flow log level": ""
+            "flowLogLevel": ""
           },
-          "actions": [
-            {
-              "ref": "github.com/project-flogo/flow",
-              "settings": {
-                "flowURI": "res://flow:FlowA"
-              }
+          "action": {
+            "ref": "github.com/project-flogo/flow",
+            "settings": {
+              "flowURI": "res://flow:FlowA"
+            },
+            "output": {
+              "reply": "return me"
             }
-          ]
+          },
+          "reply": {
+            "reply": ""
+          },
+          "name": "FlowA"
         }
       ]
     }
@@ -65,5 +73,9 @@
         "flowId": "eb9ee5c4-f97f-4875-a55f-dae48c986238"
       }
     }
-  ]
+  ],
+  "properties": [],
+  "connections": {},
+  "contrib": "W3sicmVmIjoiZ2l0aHViLmNvbS9wcm9qZWN0LWZsb2dvL2NvbnRyaWIvYWN0aXZpdHkvbG9nIiwiczNsb2NhdGlvbiI6IntVU0VSSUR9L0RlZmF1bHQvYWN0aXZpdHkvbG9nIn0seyJyZWYiOiJnaXRodWIuY29tL2Qtc2F1ZXIvZXhwbG9yaW5nX2Zsb2dvL3RyaWdnZXIvbG9nLWxldmVsLXRyaWdnZXIiLCJzM2xvY2F0aW9uIjoie1VTRVJJRH0vRGVmYXVsdC90cmlnZ2VyL2xvZy1sZXZlbC10cmlnZ2VyIn0seyJyZWYiOiJnaXQudGliY28uY29tL2dpdC9wcm9kdWN0L2lwYWFzL3dpLWNvbnRyaWIuZ2l0L2NvbnRyaWJ1dGlvbnMvR2VuZXJhbCIsInMzbG9jYXRpb24iOiJUaWJjby9HZW5lcmFsIn1d",
+  "fe_metadata": "UEsDBAoAAAAIAIegtFKrqSRGFQAAABMAAAAIAAAAYXBwLmpzb26rViopykxPTy1yy8kvL1ayio6tBQBQSwECFAAKAAAACACHoLRSq6kkRhUAAAATAAAACAAAAAAAAAAAAAAAAAAAAAAAYXBwLmpzb25QSwUGAAAAAAEAAQA2AAAAOwAAAAAA"
 }

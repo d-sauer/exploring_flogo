@@ -1,4 +1,4 @@
-# Test trigger
+# Log-level trigger
 
 How to create trigger: https://tibcosoftware.github.io/flogo/labs/building-triggers/
 
@@ -13,3 +13,12 @@ Description for `metadata.json`
 - settings: An array of name/type pairs that describe global settings of the trigger (configuration that will be the same for every instance of this trigger used in your app)
 - output: An array of name/type pairs that describe the output of the trigger (the data that gets sent to your flow)
 - handler: An array of name/type pairs that describe flow specific settings of the trigger (configuration that will be unique for every instance of this trigger used in your app) 
+
+
+## Development
+
+Import development to Flogo UI
+```
+github.com/d-sauer/exploring_flogo/trigger/log-level-trigger@development
+```
+

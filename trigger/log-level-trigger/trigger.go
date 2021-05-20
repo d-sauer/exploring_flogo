@@ -10,15 +10,11 @@ import (
 )
 
 func createEndpoint(t *Trigger) func() {
-	t.logger.Debug("Start creating endpoint")
 	path := t.settings.Path
+	port := 5544
 
-	restoreLogger := initLogger(path, 1065)
+	t.logger.Infof("Start creating endpoint '%s' on port %d", path, port)
 
-	return restoreLogger
-}
-
-func initLogger(path string, port int) func() {
 	config := zap.NewProductionEncoderConfig()
 	config.EncodeTime = func(t time.Time, enc zapcore.PrimitiveArrayEncoder) {
 		nanos := t.UnixNano()
@@ -32,7 +28,9 @@ func initLogger(path string, port int) func() {
 
 	mux := http.NewServeMux()
 	mux.Handle(path, atom)
-	go http.ListenAndServe(fmt.Sprintf(":%s", port), mux)
+	go http.ListenAndServe(fmt.Sprintf(":%d", port), mux)
+
+	t.logger.Info("Endpoint created")
 
 	return zap.ReplaceGlobals(logr)
 }
